@@ -1,19 +1,23 @@
-from bs4 import BeautifulSoup as bs
-from selenium import webdriver
-from dataclasses import dataclass
+######################################## IMPORTS AND INIT
+
+import os
 import time
 import math
 import csv
 import flair
 import traceback
+from bs4 import BeautifulSoup as bs
+from selenium import webdriver
+from dotenv import load_dotenv
+load_dotenv()
 
 ######################################## GLOBAL VARIABLES
 
 # Harvard Key authentication parameters
 ORIGIN = "https://www.pin1.harvard.edu"
 LOGIN_PATH = "/cas/login?service=https%3A%2F%2Fkey.harvard.edu%2Fmanage-account"
-USER_LOGIN = ""       # Insert Harvard Email
-USER_PASSWORD = ""    # Insert password
+USER_LOGIN = os.getenv("USER_LOGIN")        # Insert Harvard Email
+USER_PASSWORD = os.getenv("USER_PASSWORD")  # Insert password
 
 # QGuide URLs
 OLD_URL = "https://course-evaluation-reports.fas.harvard.edu/fas/list?"
@@ -74,6 +78,10 @@ def qscrape_old():
     try:
         # Navigate to old QGuide page
         CHROME.get(OLD_URL)
+        
+        '''
+        IMPLEMENTATION NEEDED
+        '''
 
         # Return success
         print("SCRAPE SUCCESS.\n")
@@ -121,15 +129,21 @@ def qscrape_new():
         return [string_to_float(table[1].contents[2].find("td", attrs={"class": "TabularBody_RightColumn_NoWrap"}).string)]
     
     def get_comment_sentiment(source):
+        # Gather comments and run sentiment analysis
         comments = source
         comments = comments.find("tbody").contents
         comments = [i.find("td").string for i in comments if i != '\n']
         sentiment = 0.0
         for comment in comments:
+            # Check for null comment
             if not comment:
                 continue
+
+            # Initialize model and predict
             s = flair.data.Sentence(comment)
             FLAIR.predict(s)
+
+            # Analyze label
             s = s.to_dict()["labels"][0]
             if s["value"] == 'NEGATIVE':
                 sentiment += -1.0 * s["confidence"]
@@ -199,6 +213,7 @@ def qscrape_new():
                         course_evaluations = soup.find_all("div", attrs={"class": "report-block"})
                         course_comments = soup.find("div", attrs={"class": "avoid-page-break-inside"})
 
+                        # Initialize null values
                         c_sum = [course_name, course_description, course_instructor, dept_name, term, course_url]
                         c_res = [float("nan")] * 3
                         c_rat = [float("nan")] * 5
@@ -206,6 +221,8 @@ def qscrape_new():
                         c_wor = [float("nan")]
                         c_rec = [float("nan")]
                         c_sen = [float("nan")]
+
+                        # Check for existing page components
                         for eval in course_evaluations:
                             header = eval.find("span").string
                             if header.startswith("Course Response"):
@@ -223,8 +240,11 @@ def qscrape_new():
                         else: 
                             c_sen = [float("nan")]
                         
+                        # Write data to CSV
                         course_data = c_sum + c_res + c_rat + c_ins + c_wor + c_rec + c_sen
                         writer.writerow(course_data)
+
+                        # Print progress
                         print(repr(course_name), repr(course_description), repr(course_instructor))
 
         # Return success
@@ -234,6 +254,8 @@ def qscrape_new():
         # Return failure
         print(traceback.format_exc())
         return 1
+
+######################################## MAIN
 
 if __name__ == "__main__":
     # Authenticate and retrieve login status
@@ -248,6 +270,3 @@ if __name__ == "__main__":
     print("PROCESS COMPLETE.")
     CHROME.close()
     quit()
-
-
-    
