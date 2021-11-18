@@ -1,8 +1,12 @@
 <template>
   <v-app>
-    <v-app-bar>
+    <v-app-bar
+      app
+      height=100
+      clipped-left
+    >
     </v-app-bar>
-
+    
     <!-- Sizes your content based upon application components -->
     <v-main>
 
@@ -13,7 +17,6 @@
         <router-view></router-view>
       </v-container>
     </v-main>
-
     <v-footer app>
       <!-- -->
     </v-footer>

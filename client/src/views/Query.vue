@@ -1,64 +1,89 @@
 <template>
-  <div class="query">
-    <v-app-bar 
-      height=1000
-      :collapse="!drawer"
-      absolute
+  <v-row>
+    <v-column>
+    <v-navigation-drawer
+      app
+      clipped
+      width=360
     >
-      <v-checkbox
-        v-model="drawer"
-        color="white"
-        hide-details
-      ></v-checkbox>
-    </v-app-bar>
-    <!-- <v-card class="overflow-hidden">
-      <v-app-bar
-        :collapse="!collapseOnScroll"
-        :collapse-on-scroll="collapseOnScroll"
-        absolute
-        color="deep-purple accent-4"
-        dark
-        scroll-target="#scrolling-techniques-6"
-      >
-        <v-app-bar-nav-icon></v-app-bar-nav-icon>
+      <v-container>
+        <v-expansion-panels multiple>
+          <v-expansion-panel>
+            <v-expansion-panel-header>
+              Course Info
+            </v-expansion-panel-header>
+            <v-expansion-panel-content>
+              <RatingSlider label="Overall" />
+              <RatingSlider label="Materials" />
+              <RatingSlider label="Assignments" />
+              <RatingSlider label="Feedback" />
+              <RatingSlider label="Section" />
+            </v-expansion-panel-content>
+          </v-expansion-panel>
 
-        <v-toolbar-title>Collapsing Bar</v-toolbar-title>
+          <v-expansion-panel>
+            <v-expansion-panel-header>
+              Course Ratings
+            </v-expansion-panel-header>
+            <v-expansion-panel-content>
+              <RatingSlider label="Overall" />
+              <RatingSlider label="Materials" />
+              <RatingSlider label="Assignments" />
+              <RatingSlider label="Feedback" />
+              <RatingSlider label="Section" />
+            </v-expansion-panel-content>
+          </v-expansion-panel>
 
-        <v-spacer></v-spacer>
+          <v-expansion-panel>
+            <v-expansion-panel-header>
+              Instructor Ratings
+            </v-expansion-panel-header>
+            <v-expansion-panel-content>
+              <RatingSlider label="Overall" />
+              <RatingSlider label="Lectures" />
+              <RatingSlider label="Accessibility" />
+              <RatingSlider label="Enthusiasm" />
+              <RatingSlider label="Encouragement" />
+              <RatingSlider label="Feedback" />
+              <RatingSlider label="Timeliness" />
+            </v-expansion-panel-content>
+          </v-expansion-panel>
 
-        <v-checkbox
-          v-model="collapseOnScroll"
-          color="white"
-          hide-details
-        ></v-checkbox>
-      </v-app-bar>
-      <v-sheet
-        id="scrolling-techniques-6"
-        class="overflow-y-auto"
-        max-height="600"
-      >
-        <v-container style="height: 1000px;"></v-container>
-      </v-sheet>
-    </v-card> -->
-  </div>
-  <!-- <v-navigation-drawer app>
-    <v-list-item>
-      <v-list-item-content>
-        <v-list-item-title>
-          QGuidePlus
-        </v-list-item-title>
-        <v-list-item-subtitle>
-          Harvard QGuide but better.
-        </v-list-item-subtitle>
-      </v-list-item-content>
-    </v-list-item>
-    <v-divider></v-divider>
-  </v-navigation-drawer> -->
+          <v-expansion-panel>
+            <v-expansion-panel-header>
+              Evaluations
+            </v-expansion-panel-header>
+            <v-expansion-panel-content>
+              <RatingSlider label="Workload" />
+              <RatingSlider label="Recommendability" />
+              <RatingSlider label="Comment Sentiment" />
+            </v-expansion-panel-content>
+          </v-expansion-panel>
+        </v-expansion-panels>
+        <v-btn
+              x-large
+              rounded
+              color="red darken-4"
+              dark
+            >
+          Search
+        </v-btn>
+      </v-container>
+    </v-navigation-drawer>
+    </v-column>
+    <v-column>
+      <h1>This is the home page</h1>
+    </v-column>
+  </v-row>
+  
 </template>
 
 <script>
+  import RatingSlider from "../components/RatingSlider.vue"
   export default {
-    name: 'Home',
-    data: () => ({ drawer: true }),
+    name: 'Query',
+    components: {
+      RatingSlider,
+    }
   }
 </script>
