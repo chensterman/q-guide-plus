@@ -3,13 +3,14 @@
         <v-checkbox 
             v-model="used"
             @change="emitToggle"
+            color="red darken-4"
         ></v-checkbox>
         <div class="flex-grow-1">
             <v-subheader>{{ label }}</v-subheader>
             <v-range-slider
                 v-model="values"
                 @change="emitQuery"
-                height=5
+                height=15
                 thumb-color="red darken-4"
                 track-color="grey"
                 color="red darken-4"

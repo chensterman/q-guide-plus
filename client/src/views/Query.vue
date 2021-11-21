@@ -1,14 +1,13 @@
 <template>
-  <div class="d-flex">
+  <div class="d-flex flex-row">
     <v-navigation-drawer
       v-model="drawer"
       app
       clipped
-      width="30%"
       align="center"
-      color="amber lighten-2"
+      width="25%"
     >
-      <v-card rounded="false" color="red darken-4" height="10%" class="mb-5">
+      <v-card rounded="0" color="red darken-4" height="10%" class="mb-5">
         <v-card-title primary-title class="justify-center">
           <p style="color: white">Search Filters</p>
         </v-card-title>
@@ -16,14 +15,14 @@
 
       <v-expansion-panels multiple class="px-5 pb-5">
         <v-expansion-panel> 
-          <v-expansion-panel-header>
+          <v-expansion-panel-header color="#f8e8ca">
             Course Info
           </v-expansion-panel-header>
-          <v-expansion-panel-content>
+          <v-expansion-panel-content color="#f8e8ca">
             <TextField v-model="queries" param="courseSummary.catalog" label="Catalog (contains)" hint="e.g. COMPSCI 50"/>
             <TextField v-model="queries" param="courseSummary.title" label="Title (contains)" hint="e.g. Machine Learning"/>
             <TextField v-model="queries" param="courseSummary.instructor" label="Instructor (contains)" hint="e.g. Malan"/>
-            <v-divider class="mt-5 mb-10" />
+            <v-divider class="mt-3 mb-6" />
             <Dropdown v-model="queries" param="courseSummary.department" label="Department" :items="departments" />
             <Dropdown v-model="queries" param="courseSummary.term" label="Term" :items="terms" />
             <RatingSlider v-model="queries" param="courseStat.enrollment" label="Enrollment" :max=800 :step=1 />
@@ -32,10 +31,10 @@
         </v-expansion-panel>
 
         <v-expansion-panel>
-          <v-expansion-panel-header>
+          <v-expansion-panel-header color="#f8e8ca">
             Course Ratings
-          </v-expansion-panel-header>
-          <v-expansion-panel-content>
+          </v-expansion-panel-header >
+          <v-expansion-panel-content color="#f8e8ca">
             <RatingSlider v-model="queries" param="courseRating.overall" label="Overall" />
             <RatingSlider v-model="queries" param="courseRating.materials" label="Materials" />
             <RatingSlider v-model="queries" param="courseRating.assignments" label="Assignments" />
@@ -45,10 +44,10 @@
         </v-expansion-panel>
 
         <v-expansion-panel>
-          <v-expansion-panel-header>
+          <v-expansion-panel-header color="#f8e8ca">
             Instructor Ratings
           </v-expansion-panel-header>
-          <v-expansion-panel-content>
+          <v-expansion-panel-content color="#f8e8ca">
             <RatingSlider v-model="queries" param="instructorRating.overall" label="Overall" />
             <RatingSlider v-model="queries" param="instructorRating.lectures" label="Lectures" />
             <RatingSlider v-model="queries" param="instructorRating.accessibility" label="Accessibility" />
@@ -60,10 +59,10 @@
         </v-expansion-panel>
 
         <v-expansion-panel>
-          <v-expansion-panel-header>
+          <v-expansion-panel-header color="#f8e8ca">
             Evaluations
           </v-expansion-panel-header>
-          <v-expansion-panel-content>
+          <v-expansion-panel-content color="#f8e8ca">
             <RatingSlider v-model="queries" param="courseEval.workload" label="Workload" :max=30 :step=1 />
             <RatingSlider v-model="queries" param="courseEval.recommend" label="Recommendability" />
             <RatingSlider v-model="queries" param="courseEval.sentiment" label="Comment Sentiment" :min=-1 :max=1 />
@@ -82,7 +81,8 @@
         Search
       </v-btn>
     </v-navigation-drawer>
-    <v-btn
+
+    <!-- <v-btn
       absolute
       :style="drawer ? 'transform: translateX(-100px);z-index: 5' : null"
       @click="drawer = !drawer"
@@ -91,8 +91,17 @@
       dark
     >
       {{ buttonSymbol() }}
-    </v-btn>
-    <p> {{ this.courses }} </p>
+    </v-btn> -->
+
+    <v-card class="ma-5 flex-grow-1" color="red darken-4">
+      <v-card class="ma-10" height="10%" color="#f8e8ca">
+        <v-card-title primary-title class="justify-center">
+          <p style="color: black">RESULTS</p>
+        </v-card-title>
+      </v-card>
+      <Course />
+      <Course />
+    </v-card>
   </div>
 </template>
 
@@ -100,6 +109,7 @@
   import RatingSlider from "../components/RatingSlider.vue"
   import Dropdown from "../components/Dropdown.vue"
   import TextField from "../components/TextField.vue"
+  import Course from "../components/Course.vue"
   import API from "../controllers/api"
   export default {
     name: 'Query',
@@ -107,6 +117,7 @@
       RatingSlider,
       Dropdown,
       TextField,
+      Course,
     },
     data: () => ({
       departments: [

@@ -3,6 +3,7 @@
         <v-checkbox 
             v-model="used"
             @change="emitToggle"
+            color="red darken-4"
             class="my-auto"
         ></v-checkbox>
         <v-select
@@ -10,6 +11,7 @@
             @change="emitQuery"
             :items="items"
             :label="label"
+            background-color="white"
             dense
             outlined
             :disabled="!used"

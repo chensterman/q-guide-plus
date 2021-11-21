@@ -3,12 +3,17 @@
         <v-checkbox 
             v-model="used"
             @change="emitToggle"
+            color="red darken-4"
+            class="my-auto"
         ></v-checkbox>
         <v-text-field
             v-model="value"
             @change="emitQuery"
             :label="label"
             :hint="hint"
+            outlined
+            dense
+            background-color="white"
             :disabled="!used"
         ></v-text-field>
     </div>
