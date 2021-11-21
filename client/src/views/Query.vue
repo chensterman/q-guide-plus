@@ -6,7 +6,7 @@
       clipped
       width="30%"
       align="center"
-      color="red lighten-2"
+      color="amber lighten-2"
     >
       <v-card rounded="false" color="red darken-4" height="10%" class="mb-5">
         <v-card-title primary-title class="justify-center">
@@ -20,12 +20,14 @@
             Course Info
           </v-expansion-panel-header>
           <v-expansion-panel-content>
-            <TextField label="Catalog (contains)" hint="e.g. COMPSCI 50"/>
-            <TextField label="Title (contains)" hint="e.g. Machine Learning"/>
-            <TextField label="Instructor (contains)" hint="e.g. Malan"/>
+            <TextField v-model="queries" param="courseSummary.catalog" label="Catalog (contains)" hint="e.g. COMPSCI 50"/>
+            <TextField v-model="queries" param="courseSummary.title" label="Title (contains)" hint="e.g. Machine Learning"/>
+            <TextField v-model="queries" param="courseSummary.instructor" label="Instructor (contains)" hint="e.g. Malan"/>
             <v-divider class="mt-5 mb-10" />
-            <Dropdown label="Department" :items="departments" />
-            <Dropdown label="Term" :items="terms" />
+            <Dropdown v-model="queries" param="courseSummary.department" label="Department" :items="departments" />
+            <Dropdown v-model="queries" param="courseSummary.term" label="Term" :items="terms" />
+            <RatingSlider v-model="queries" param="courseStat.enrollment" label="Enrollment" :max=800 :step=1 />
+            <RatingSlider v-model="queries" param="courseStat.responses" label="Responses" :max=800 :step=1 />
           </v-expansion-panel-content>
         </v-expansion-panel>
 
@@ -34,11 +36,11 @@
             Course Ratings
           </v-expansion-panel-header>
           <v-expansion-panel-content>
-            <RatingSlider label="Overall" />
-            <RatingSlider label="Materials" />
-            <RatingSlider label="Assignments" />
-            <RatingSlider label="Feedback" />
-            <RatingSlider label="Section" />
+            <RatingSlider v-model="queries" param="courseRating.overall" label="Overall" />
+            <RatingSlider v-model="queries" param="courseRating.materials" label="Materials" />
+            <RatingSlider v-model="queries" param="courseRating.assignments" label="Assignments" />
+            <RatingSlider v-model="queries" param="courseRating.feedback" label="Feedback" />
+            <RatingSlider v-model="queries" param="courseRating.section" label="Section" />
           </v-expansion-panel-content>
         </v-expansion-panel>
 
@@ -47,13 +49,13 @@
             Instructor Ratings
           </v-expansion-panel-header>
           <v-expansion-panel-content>
-            <RatingSlider label="Overall" />
-            <RatingSlider label="Lectures" />
-            <RatingSlider label="Accessibility" />
-            <RatingSlider label="Enthusiasm" />
-            <RatingSlider label="Encouragement" />
-            <RatingSlider label="Feedback" />
-            <RatingSlider label="Timeliness" />
+            <RatingSlider v-model="queries" param="instructorRating.overall" label="Overall" />
+            <RatingSlider v-model="queries" param="instructorRating.lectures" label="Lectures" />
+            <RatingSlider v-model="queries" param="instructorRating.accessibility" label="Accessibility" />
+            <RatingSlider v-model="queries" param="instructorRating.enthusiasm" label="Enthusiasm" />
+            <RatingSlider v-model="queries" param="instructorRating.encouragement" label="Encouragement" />
+            <RatingSlider v-model="queries" param="instructorRating.feedback" label="Feedback" />
+            <RatingSlider v-model="queries" param="instructorRating.returning" label="Timeliness" />
           </v-expansion-panel-content>
         </v-expansion-panel>
 
@@ -62,13 +64,14 @@
             Evaluations
           </v-expansion-panel-header>
           <v-expansion-panel-content>
-            <RatingSlider label="Workload" />
-            <RatingSlider label="Recommendability" />
-            <RatingSlider label="Comment Sentiment" />
+            <RatingSlider v-model="queries" param="courseEval.workload" label="Workload" :max=30 :step=1 />
+            <RatingSlider v-model="queries" param="courseEval.recommend" label="Recommendability" />
+            <RatingSlider v-model="queries" param="courseEval.sentiment" label="Comment Sentiment" :min=-1 :max=1 />
           </v-expansion-panel-content>
         </v-expansion-panel>
       </v-expansion-panels>
       <v-btn
+        @click="getQuery"
         x-large
         rounded
         width="50%"
@@ -89,7 +92,7 @@
     >
       {{ buttonSymbol() }}
     </v-btn>
-    <h1>This is the home page</h1>
+    <p> {{ this.courses }} </p>
   </div>
 </template>
 
@@ -97,6 +100,7 @@
   import RatingSlider from "../components/RatingSlider.vue"
   import Dropdown from "../components/Dropdown.vue"
   import TextField from "../components/TextField.vue"
+  import API from "../controllers/api"
   export default {
     name: 'Query',
     components: {
@@ -105,13 +109,37 @@
       TextField,
     },
     data: () => ({
-      departments: ['Foo', 'Bar', 'Fizz', 'Buzz'],
+      departments: [
+        'ARTS', 'African and African American Studies', 'American Studies', 'Anthropology', 'Applied Computation', 
+        'Applied Mathematics', 'Applied Physics', 'Art, Film, and Visual Studies', 'Astronomy', 'Biological Sciences in Public Health', 
+        'Biomedical Engineering', 'Biophysics', 'Biostatistics', 'Celtic Languages and Literatures', 'Chemical Biology', 
+        'Chemical and Physical Biology', 'Chemistry and Chemical Biology', 'Classics, The', 'Comparative Literature', 'Computer Science', 
+        'Earth and Planetary Sciences', 'East Asian Languages and Civilizations', 'Economics', 'Engineering Sciences', 'English', 
+        'Environmental Science and Engineering', 'Environmental Science and Public Policy', 'Ethnicity, Migration, Rights', 
+        'Expository Writing', 'Folklore and Mythology', 'Freshman Seminars', 'General Education', 'Germanic Languages and Literatures', 
+        'Global Health and Health Policy', 'Government', 'Graduate School of Arts and Sciences', 'Health Policy', 'History', 
+        'History and Literature', 'History of Art and Architecture', 'History of Science', 'Human Evolutionary Biology', 'Humanities', 
+        'Linguistics', 'Mathematics', 'Medical Sciences', 'Medieval Studies', 'Mind, Brain, and Behavior', 'Molecular and Cellular Biology', 
+        'Music', 'Near Eastern Languages and Civilizations', 'Neuroscience', 'No Department', 'Organismic and Evolutionary Biology', 
+        'Philosophy', 'Physics', 'Population Health Sciences', 'Psychology', 'Public Policy', 'Regional Studies - East Asia', 
+        'Religion, The Study of', 'Romance Languages and Literatures', 'Russia, Eastern Europe, and Central Asia', 
+        'Slavic Languages and Literatures', 'Social Studies', 'Sociology', 'South Asian Studies', 'Statistics', 
+        'Stem Cell and Regenerative Biology', 'Systems Biology', 'Theater, Dance, and Media', 'Women, Gender, and Sexuality, Studies of'],
       terms: ['2021 Spring', '2020 Fall', '2019 Fall'],
       drawer: true,
+      queries: [],
+      courses: [],
     }),
     methods: {
       buttonSymbol() {
-        return this.drawer ? "<" : ">"
+        return this.drawer ? "<" : ">";
+      },
+      async getQuery() {
+        var finalq = this.queries.join("");
+        finalq = finalq.slice(1);
+        finalq = "?" + finalq;
+        console.log(finalq);
+        this.courses = await API.query(finalq);
       },
     },
   }
