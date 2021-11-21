@@ -1,5 +1,5 @@
 <template>
-    <v-row>
+    <div class="d-flex flex-row">
         <v-checkbox 
             v-model="used"
         ></v-checkbox>
@@ -8,7 +8,7 @@
             :hint="hint"
             :disabled="!used"
         ></v-text-field>
-    </v-row>
+    </div>
 </template>
 
 <script>

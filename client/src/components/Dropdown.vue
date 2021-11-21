@@ -1,7 +1,8 @@
 <template>
-    <v-row class="d-flex align-center">
-         <v-checkbox 
+    <div class="d-flex flex-row">
+        <v-checkbox 
             v-model="used"
+            class="my-auto"
         ></v-checkbox>
         <v-select
             :items="items"
@@ -10,7 +11,7 @@
             outlined
             :disabled="!used"
         ></v-select>
-    </v-row>
+    </div>
 </template>
 
 <script>
