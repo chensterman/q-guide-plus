@@ -11,7 +11,6 @@
         <v-card-title class="justify-center">
           <p style="color: white">Search Filters</p>
         </v-card-title>
-        <v-app-bar-nav-icon></v-app-bar-nav-icon>
       </v-card>
 
       <v-expansion-panels multiple class="px-5 pb-5">
@@ -87,6 +86,13 @@
       <v-card class="ma-10" height="80" color="#f8e8ca">
           <div class="title">RESULTS</div>
       </v-card>
+      <div class="loading" v-if="this.loading">
+        <v-progress-circular
+          class="ma-10"
+          indeterminate
+          color="#f8e8ca"
+        ></v-progress-circular>
+      </div>
       <Course v-for="c in this.courses" v-bind:key="c" :course="c" />
     </v-card>
   </div>
@@ -125,6 +131,7 @@
         'Stem Cell and Regenerative Biology', 'Systems Biology', 'Theater, Dance, and Media', 'Women, Gender, and Sexuality, Studies of'],
       terms: ['2021 Spring', '2020 Fall', '2019 Fall'],
       drawer: true,
+      loading: false,
       queries: [],
       courses: [],
     }),
@@ -133,11 +140,15 @@
         return this.drawer ? "<" : ">";
       },
       async getQuery() {
+        this.courses = [];
+        this.loading = true;
         var finalq = this.queries.join("");
         finalq = finalq.slice(1);
-        finalq = "?" + finalq;
-        console.log(finalq);
-        this.courses = await API.query(finalq);
+        if (finalq !== "") {
+          finalq = "?" + finalq;
+          this.courses = await API.query(finalq);
+        }
+        this.loading = false;
       },
     },
   }
@@ -150,5 +161,12 @@ div.title {
   font-weight: 900;
   font-size: 2.5vw;
   color: black;
+}
+
+div.loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 20vh;
 }
 </style>

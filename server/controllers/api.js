@@ -92,7 +92,11 @@ module.exports = class API {
                 }
             };
             // Make the final query (and $and of all the given queries)
-            const courses = await course.find({"$and": query});
+            const courses = await course.find({"$and": query}, null, {
+                "sort": {
+                    "courseSummary.catalog": 1 //Sort by Date Added DESC
+                }
+            });
             res.status(200).send(courses);
         } catch(e) {
             res.status(400).json({ message: e.message} );
