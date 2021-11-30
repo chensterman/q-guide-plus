@@ -11,6 +11,7 @@
         <v-card-title class="justify-center">
           <p style="color: white">Search Filters</p>
         </v-card-title>
+        <v-app-bar-nav-icon></v-app-bar-nav-icon>
       </v-card>
 
       <v-expansion-panels multiple class="px-5 pb-5">
@@ -84,9 +85,7 @@
 
     <v-card class="ma-5 flex-grow-1" color="red darken-4">
       <v-card class="ma-10" height="80" color="#f8e8ca">
-        <v-card-title class="justify-center">
-          <h1 class="title">RESULTS</h1>
-        </v-card-title>
+          <div class="title">RESULTS</div>
       </v-card>
       <Course v-for="c in this.courses" v-bind:key="c" :course="c" />
     </v-card>
@@ -145,9 +144,11 @@
 </script>
 
 <style scoped>
-h1.title {
+div.title {
+  padding: 20px 0 20px 0;
+  text-align: center;
   font-weight: 900;
-  font-size: 108px;
+  font-size: 2.5vw;
   color: black;
 }
 </style>

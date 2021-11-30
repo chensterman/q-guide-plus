@@ -6,7 +6,6 @@
       clipped-left
       color="#f8e8ca"
     >
-      <v-app-bar-nav-icon></v-app-bar-nav-icon>
       <div class="appbar">
         <h1 class="appbar">QGuide+</h1>
       </div>
