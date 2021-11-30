@@ -8,7 +8,7 @@
       width="25%"
     >
       <v-card rounded="0" color="red darken-4" height="10%" class="mb-5">
-        <v-card-title primary-title class="justify-center">
+        <v-card-title class="justify-center">
           <p style="color: white">Search Filters</p>
         </v-card-title>
       </v-card>
@@ -82,25 +82,13 @@
       </v-btn>
     </v-navigation-drawer>
 
-    <!-- <v-btn
-      absolute
-      :style="drawer ? 'transform: translateX(-100px);z-index: 5' : null"
-      @click="drawer = !drawer"
-      rounded
-      color="red lighten-2"
-      dark
-    >
-      {{ buttonSymbol() }}
-    </v-btn> -->
-
     <v-card class="ma-5 flex-grow-1" color="red darken-4">
-      <v-card class="ma-10" height="10%" color="#f8e8ca">
-        <v-card-title primary-title class="justify-center">
-          <p style="color: black">RESULTS</p>
+      <v-card class="ma-10" height="80" color="#f8e8ca">
+        <v-card-title class="justify-center">
+          <h1 class="title">RESULTS</h1>
         </v-card-title>
       </v-card>
-      <Course />
-      <Course />
+      <Course v-for="c in this.courses" v-bind:key="c" :course="c" />
     </v-card>
   </div>
 </template>
@@ -155,3 +143,11 @@
     },
   }
 </script>
+
+<style scoped>
+h1.title {
+  font-weight: 900;
+  font-size: 108px;
+  color: black;
+}
+</style>
