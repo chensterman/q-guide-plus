@@ -1,7 +1,6 @@
 <template>
   <div class="d-flex flex-row">
     <v-navigation-drawer
-      v-model="drawer"
       app
       clipped
       align="center"
@@ -130,15 +129,11 @@
         'Slavic Languages and Literatures', 'Social Studies', 'Sociology', 'South Asian Studies', 'Statistics', 
         'Stem Cell and Regenerative Biology', 'Systems Biology', 'Theater, Dance, and Media', 'Women, Gender, and Sexuality, Studies of'],
       terms: ['2021 Spring', '2020 Fall', '2019 Fall'],
-      drawer: true,
       loading: false,
       queries: [],
       courses: [],
     }),
     methods: {
-      buttonSymbol() {
-        return this.drawer ? "<" : ">";
-      },
       async getQuery() {
         this.courses = [];
         this.loading = true;

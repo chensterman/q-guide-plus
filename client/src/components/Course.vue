@@ -19,7 +19,7 @@
                 <div class="cardtitle">Course Ratings</div>
                 <div class="d-flex flex-row justify-space-around">
                     <div class="center" v-for="(value, key) in this.course['courseRating']" v-bind:key="(value, key)">
-                        <div>{{ value }}</div>
+                        <div :style="colorMap(value, 2, 5)">{{ value }}</div>
                         <div class="key">{{ key.charAt(0).toUpperCase() + key.slice(1) }}</div>
                     </div>
                 </div>
@@ -27,7 +27,7 @@
                 <div class="cardtitle">Instructor Ratings</div>
                 <div class="d-flex flex-row justify-space-around">
                     <div class="center" v-for="(value, key) in this.course['instructorRating']" v-bind:key="(value, key)">
-                        <div>{{ value }}</div>
+                        <div :style="colorMap(value, 2, 5)">{{ value }}</div>
                         <div class="key">{{ key.charAt(0).toUpperCase() + key.slice(1) }}</div>
                     </div>
                 </div>
@@ -42,9 +42,17 @@
                         <div>{{ this.course['courseStat']['responses'] }}</div>
                         <div class="key">Responses</div>
                     </div>
-                    <div class="center" v-for="(value, key) in this.course['courseEval']" v-bind:key="(value, key)">
-                        <div>{{ Math.round(value * 100) / 100 }}</div>
-                        <div class="key">{{ key.charAt(0).toUpperCase() + key.slice(1) }}</div>
+                    <div class="center">
+                        <div>{{ this.course['courseEval']['workload'] }}</div>
+                        <div class="key">Workload</div>
+                    </div>
+                    <div class="center">
+                        <div :style="colorMap(this.course['courseEval']['recommend'], 2, 5)">{{ this.course['courseEval']['recommend'] }}</div>
+                        <div class="key">Recommendability</div>
+                    </div>
+                    <div class="center">
+                        <div>{{ Math.round(this.course['courseEval']['sentiment'] * 100) / 100 }}</div>
+                        <div class="key">Sentiment</div>
                     </div>
                 </div>
             </v-col>
@@ -59,6 +67,29 @@
         course: {
             type: Object,
             required: true,
+        },
+    },
+    methods: {
+        colorMap(value, min, max) {
+            if (!value) {
+                return "";
+            }
+
+            var textShadow = " text-shadow: 0px 0px 2px #000000;";
+            if (value < min) {
+                return "color:rgb(255, 0, 0);" + textShadow;
+            }
+            
+            var mid = (min + max) / 2;
+            var mdiff = (max - min) / 2;
+            var vdiff = value - min;
+            if (value < mid) {
+                var color = Math.round(255 * (vdiff / mdiff));
+                return "color:rgb(255, " + String(color) + ", 0);" + textShadow;
+            } else {
+                var color = Math.round(255 * (1 - (vdiff - mdiff) / mdiff));
+                return "color:rgb(" + String(color) + ", 255, 0);" + textShadow;
+            }
         },
     },
   }
