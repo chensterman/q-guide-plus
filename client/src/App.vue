@@ -9,6 +9,14 @@
       <div class="appbar">
         <h1 class="appbar">QGuide+</h1>
       </div>
+
+      <v-btn dark large right class="mx-5" to="/" color="red darken-4">
+        About
+      </v-btn>
+
+      <v-btn dark large right class="mx-5" to="/query" color="red darken-4">
+        Query
+      </v-btn>
     </v-app-bar>
     
     <!-- Sizes your content based upon application components -->
@@ -26,11 +34,22 @@
   </v-app>
 </template>
 
+<script>
+  export default {
+    data: () => ({
+      about: false,
+    }),
+    methods: {
+    
+    },
+  }
+</script>
+
 <style scoped>
 div.appbar {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   justify-content: center;
   text-align: center;
 }

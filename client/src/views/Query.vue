@@ -62,8 +62,8 @@
             Evaluations
           </v-expansion-panel-header>
           <v-expansion-panel-content color="#f8e8ca">
-            <RatingSlider v-model="queries" param="courseEval.workload" label="Workload" :max=30 :step=1 />
             <RatingSlider v-model="queries" param="courseEval.recommend" label="Recommendability" />
+            <RatingSlider v-model="queries" param="courseEval.workload" label="Workload" :max=30 :step=1 />
             <RatingSlider v-model="queries" param="courseEval.sentiment" label="Comment Sentiment" :min=-1 :max=1 />
           </v-expansion-panel-content>
         </v-expansion-panel>

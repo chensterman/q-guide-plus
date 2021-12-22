@@ -51,7 +51,9 @@
                         <div class="key">Recommendability</div>
                     </div>
                     <div class="center">
-                        <div>{{ Math.round(this.course['courseEval']['sentiment'] * 100) / 100 }}</div>
+                        <div :style="colorMap(this.course['courseEval']['sentiment'], 0, 1)">
+                            {{ Math.round(this.course['courseEval']['sentiment'] * 100) / 100 }} {{ emojiMap(this.course['courseEval']['sentiment'], 0, 1) }}
+                        </div>
                         <div class="key">Sentiment</div>
                     </div>
                 </div>
@@ -75,20 +77,34 @@
                 return "";
             }
 
-            var textShadow = " text-shadow: 0px 0px 2px #000000;";
+            var textShadow = "";
             if (value < min) {
-                return "color:rgb(255, 0, 0);" + textShadow;
+                return "color:rgb(200, 0, 0);" + textShadow;
             }
-            
+
             var mid = (min + max) / 2;
             var mdiff = (max - min) / 2;
             var vdiff = value - min;
             if (value < mid) {
-                var color = Math.round(255 * (vdiff / mdiff));
-                return "color:rgb(255, " + String(color) + ", 0);" + textShadow;
+                var color = Math.round(200 * (vdiff / mdiff));
+                return "color:rgb(200, " + String(color) + ", 0);" + textShadow;
             } else {
                 var color = Math.round(255 * (1 - (vdiff - mdiff) / mdiff));
-                return "color:rgb(" + String(color) + ", 255, 0);" + textShadow;
+                return "color:rgb(" + String(color) + ", 200, 0);" + textShadow;
+            }
+        },
+        emojiMap(value, min, max){
+            if (!value) {
+                return "";
+            }
+            if (value < min) {
+                return "😠";
+            }
+            var mid = (min + max) / 2;
+            if (value < mid) {
+                return "😐";
+            } else {
+                return "😀";
             }
         },
     },
