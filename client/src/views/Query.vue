@@ -82,8 +82,8 @@
     </v-navigation-drawer>
 
     <v-card class="ma-5 flex-grow-1" color="red darken-4">
-      <v-card class="ma-10" height="80" color="#f8e8ca">
-          <div class="title">RESULTS</div>
+      <v-card class="ma-10" color="#f8e8ca">
+          <div class="heading">{{ this.results }}</div>
       </v-card>
       <div class="loading" v-if="this.loading">
         <v-progress-circular
@@ -132,6 +132,7 @@
       loading: false,
       queries: [],
       courses: [],
+      results: "Put in a query to search!",
     }),
     methods: {
       async getQuery() {
@@ -142,6 +143,7 @@
         if (finalq !== "") {
           finalq = "?" + finalq;
           this.courses = await API.query(finalq);
+          this.results = String(this.courses.length) + " Results";
         }
         this.loading = false;
       },
@@ -150,11 +152,11 @@
 </script>
 
 <style scoped>
-div.title {
+div.heading {
   padding: 20px 0 20px 0;
   text-align: center;
   font-weight: 900;
-  font-size: 2.5vw;
+  font-size: 2.0vw;
   color: black;
 }
 

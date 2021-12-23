@@ -10,11 +10,11 @@
         <h1 class="appbar">QGuide+</h1>
       </div>
 
-      <v-btn dark large right class="mx-5" to="/" color="red darken-4">
+      <v-btn dark large right class="mx-5" to="/" :color="buttonColor('/')">
         About
       </v-btn>
 
-      <v-btn dark large right class="mx-5" to="/query" color="red darken-4">
+      <v-btn dark large right class="mx-5" to="/query" :color="buttonColor('/query')">
         Query
       </v-btn>
     </v-app-bar>
@@ -37,10 +37,16 @@
 <script>
   export default {
     data: () => ({
-      about: false,
+      test: "red",
     }),
     methods: {
-    
+      buttonColor(route) {
+        if (route === window.location.pathname) {
+          return "red lighten-1"
+        } else {
+          return "red darken-4"
+        }
+      },
     },
   }
 </script>

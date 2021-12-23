@@ -81,7 +81,7 @@
 
           <div class="body">
             The workload for each course is given in terms of hours spent on
-            coursework outside of class per week.
+            coursework outside of class per week, and is the mean of all responses.
           </div>
       </v-card>
 
