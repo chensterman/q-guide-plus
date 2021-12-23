@@ -1,5 +1,5 @@
 import axios from "axios";
-const path = "http://localhost:5000/query";
+const path = "/query";
 
 export default class API {
     static async query(params) {
