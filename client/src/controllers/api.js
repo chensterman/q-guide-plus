@@ -1,5 +1,6 @@
 import axios from "axios";
-const path = "/query";
+// EXTREMELY IMPORTANT CHANGE TO CORRECT PRODUCTION URL
+const path = "https://secret-basin-84820.herokuapp.com/api/query";
 
 export default class API {
     static async query(params) {

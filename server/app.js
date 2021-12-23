@@ -17,7 +17,7 @@ app.use(express.urlencoded({ extended: true }));
 mongoose.connect(uri).then(() => console.log("Database connected.")).catch((e) => console.log(e));
 
 // Route prefixes
-app.use("/", require("./routes/routes"));
+app.use("/api/", require("./routes/routes"));
 
 if (process.env.NODE_ENV === "production") {
     app.use(express.static(__dirname + "/dist/"));
