@@ -29,11 +29,24 @@
             Course and Instructor Ratings
           </div>
 
-          <div class="body">5 - Excellent</div>
-          <div class="body">4 - Very Good</div>
-          <div class="body">3 - Good</div>
-          <div class="body">2 - Fair</div>
-          <div class="body">1 - Unsatisfactory</div>
+          <div class="body">
+            Scores for each course are the mean of all responses, and based on the scale below.
+          </div>
+          <div class="body">
+            <p style="color:green">5 - Excellent</p>
+          </div>
+          <div class="body">
+            <p style="color:#5DBB63">4 - Very Good</p>
+          </div>
+          <div class="body">
+            <p style="color:#FFD200">3 - Good</p>
+          </div>
+          <div class="body">
+            <p style="color:orange">2 - Fair</p>
+          </div>
+          <div class="body">
+            <p style="color:red">1 - Unsatisfactory</p>
+          </div>
       </v-card>
 
       <v-card class="pb-5 ma-10" color="#f8e8ca">
@@ -41,11 +54,24 @@
             Recommendability
           </div>
 
-          <div class="body">5 - Recommend with Enthusiasm</div>
-          <div class="body">4 - Likely to Recommend</div>
-          <div class="body">3 - Recommend with Reservations</div>
-          <div class="body">2 - Unlikely to Recommend</div>
-          <div class="body">1 - Definitely not Recommend</div>
+          <div class="body">
+            Scores for each course are the mean of all responses, and based on the scale below.
+          </div>
+          <div class="body">
+            <p style="color:green">5 - Recommend with Enthusiasm</p>
+          </div>
+          <div class="body">
+            <p style="color:#5DBB63">4 - Likely to Recommend</p>
+          </div>
+          <div class="body">
+            <p style="color:#FFD200">3 - Recommend with Reservations</p>
+          </div>
+          <div class="body">
+            <p style="color:orange">2 - Unlikely to Recommend</p>
+          </div>
+          <div class="body">
+            <p style="color:red">1 - Definitely not Recommend</p>
+          </div>
       </v-card>
 
       <v-card class="pb-5 ma-10" color="#f8e8ca">
@@ -53,7 +79,10 @@
             Workload
           </div>
 
-          <div class="body">5 - </div>
+          <div class="body">
+            The workload for each course is given in terms of hours spent on
+            coursework outside of class per week.
+          </div>
       </v-card>
 
       <v-card class="pb-5 ma-10" color="#f8e8ca">
@@ -61,7 +90,18 @@
             Comment Sentiment (BETA)
           </div>
 
-          <div class="body">5 - </div>
+          <div class="body">
+            We are currently beta testing the comment sentiment feature which
+            provides an estimated sentiment score for each course based on comments.
+            This is achieved by running each comment through a NLP model, which scores
+            it 1 for positive, 0 for neutral, and -1 for negative. The overall sentiment
+            score for the course is simply the average over all of its comments.
+          </div>
+          <div class="body">
+            You could generally assume that any course under a score of 0.0 has pretty
+            bad sentiment, any score between 0.0-0.5 has "ok" sentiment, and anything
+            above 0.5 as pretty solid sentiment. Accuracy may vary.
+          </div>
       </v-card>
     </v-card>
 </template>
@@ -87,5 +127,10 @@ div.body {
   font-weight: 900;
   font-size: 1.5vw;
   color: black;
+}
+
+p{
+   margin:0;
+   padding:0;
 }
 </style>
