@@ -2,19 +2,20 @@
   <v-app>
     <v-app-bar
       app
-      height=100
+      height="100%"
       clipped-left
       color="#f8e8ca"
     >
+
       <div class="appbar">
         <h1 class="appbar">QGuide+</h1>
       </div>
 
-      <v-btn dark large right class="mx-5" to="/" :color="buttonColor('/')">
+      <v-btn dark large right class="mx-10" to="/" :color="buttonColor('/')">
         About
       </v-btn>
 
-      <v-btn dark large right class="mx-5" to="/query" :color="buttonColor('/query')">
+      <v-btn dark large right to="/query" :color="buttonColor('/query')">
         Query
       </v-btn>
     </v-app-bar>
@@ -53,11 +54,9 @@
 
 <style scoped>
 div.appbar {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+  width: 50%;
   justify-content: center;
-  text-align: center;
+  text-align: right;
 }
 
 h1.appbar {

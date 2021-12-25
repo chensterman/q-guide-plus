@@ -3,10 +3,11 @@
     <v-navigation-drawer
       app
       clipped
+      permanent
       align="center"
       width="25%"
     >
-      <v-card rounded="0" color="red darken-4" height="10%" class="mb-5">
+      <v-card rounded="0" color="red darken-4" class="mb-5">
         <v-card-title class="justify-center">
           <p style="color: white">Search Filters</p>
         </v-card-title>
@@ -165,5 +166,10 @@ div.loading {
     align-items: center;
     justify-content: center;
     height: 20vh;
+}
+
+p{
+   margin:0;
+   padding:0;
 }
 </style>
