@@ -1,6 +1,6 @@
 import axios from "axios";
 // EXTREMELY IMPORTANT CHANGE TO CORRECT PRODUCTION URL
-const path = "https://secret-basin-84820.herokuapp.com/api/query";
+const path = "https://happy-sammet-6c4891.netlify.app/api/query";
 
 export default class API {
     static async query(params) {
