@@ -1,6 +1,6 @@
 import axios from "axios";
 // EXTREMELY IMPORTANT CHANGE TO CORRECT PRODUCTION URL
-const path = "https://happy-sammet-6c4891.netlify.app/api/query";
+const path = "http://localhost:8080/api/query";
 
 export default class API {
     static async query(params) {
