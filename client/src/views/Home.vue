@@ -2,6 +2,12 @@
   <v-card class="pa-1 ma-10" color="red darken-4">
       <v-card class="pa-5 ma-10" color="#f8e8ca">
           <div class="heading">
+            UPDATED EVALUATIONS: 2021 FALL
+          </div>
+      </v-card>
+
+      <v-card class="pa-5 ma-10" color="#f8e8ca">
+          <div class="heading">
             The Q Guide Plus is designed by Harvard students, for Harvard students.
           </div>
           <div class="body">
