@@ -13,7 +13,7 @@ DB_URI = os.getenv("DB_URI")
 CLIENT = pymongo.MongoClient(DB_URI)
 
 # Courses CSV file
-CSV = "courses.csv"
+CSV = "fall2021.csv"
 
 ######################################## MAIN
 

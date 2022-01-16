@@ -26,10 +26,10 @@ NEW_URL = "https://qreports.fas.harvard.edu/browse/index?"
 # Chrome webdriver
 OPTIONS = webdriver.ChromeOptions()
 OPTIONS.add_argument('log-level=3')
-CHROME = webdriver.Chrome(options=OPTIONS)
+CHROME = webdriver.Chrome("C:\\Users\\Leon Chen\\Documents\\Projects\\q-guide-plus\\python\\chromedriver.exe", options=OPTIONS)
 
 # Courses CSV file
-CSV = "courses.csv"
+CSV = "fall2021.csv" # "courses.csv"
 
 # Sentiment analysis model
 FLAIR = flair.models.TextClassifier.load('en-sentiment')
@@ -166,7 +166,7 @@ def qscrape_new():
             CHROME.get(NEW_URL)
             soup = bs(CHROME.page_source, "html.parser")
             terms = soup.find(id="calTermDropdown").contents
-            terms = [i for i in terms if i != '\n']
+            terms = [i for i in terms if i != '\n'] 
 
             # Iterate through all terms and scrape
             for term in terms:
