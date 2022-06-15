@@ -1,5 +1,6 @@
 <template>
   <v-card class="pa-1 ma-10" color="red darken-4">
+
       <v-card class="pa-5 ma-10" color="#f8e8ca">
           <div class="heading">
             UPDATED EVALUATIONS: 2021 FALL
@@ -10,6 +11,11 @@
           <div class="heading">
             The Q Guide Plus is designed by Harvard students, for Harvard students.
           </div>
+
+          <div class="heading">
+            Blake Young, Benny Chang, Leon Chen
+          </div>
+
           <div class="body">
             We stand for convenience and utility during course registration periods,
             as we know this is the struggle of many in search of those precious gems.
