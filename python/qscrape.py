@@ -8,6 +8,7 @@ import flair
 import traceback
 from bs4 import BeautifulSoup as bs
 from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -26,10 +27,10 @@ NEW_URL = "https://qreports.fas.harvard.edu/browse/index?"
 # Chrome webdriver
 OPTIONS = webdriver.ChromeOptions()
 OPTIONS.add_argument('log-level=3')
-CHROME = webdriver.Chrome("C:\\Users\\Leon Chen\\Documents\\Projects\\q-guide-plus\\python\\chromedriver.exe", options=OPTIONS)
+CHROME = webdriver.Chrome(service=Service(executable_path=r'/usr/local/bin/chromedriver'), options=OPTIONS)
 
 # Courses CSV file
-CSV = "fall2021.csv" # "courses.csv"
+CSV = "spring2023.csv" # "courses.csv"
 
 # Sentiment analysis model
 FLAIR = flair.models.TextClassifier.load('en-sentiment')
@@ -57,8 +58,8 @@ def auth():
         time.sleep(0.5)
 
         # Input credentials and await 2FA
-        CHROME.find_element_by_id("username").send_keys(USER_LOGIN)
-        CHROME.find_element_by_id("password").send_keys(USER_PASSWORD)
+        CHROME.find_element("name", "username").send_keys(USER_LOGIN)
+        CHROME.find_element("name", "password").send_keys(USER_PASSWORD)
         input("AWAITING 2FA (PRESS ENTER WHEN FINISHED)...")
 
         # Return success
