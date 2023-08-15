@@ -91,12 +91,15 @@ module.exports = class API {
                     query.push(querySingle);
                 }
             };
+            console.log(query);
             // Make the final query (and $and of all the given queries)
-            const courses = await course.find({"$and": query}, null, {
-                "sort": {
-                    "courseSummary.catalog": 1 //Sort by Date Added DESC
-                }
-            });
+            // const courses = await course.find({"$and": query}, null, {
+            //     "sort": {
+            //         "courseSummary.catalog": 1 //Sort by Date Added DESC
+            //     }
+            // });
+            const courses = await course.find({});
+            console.log(courses)
             res.status(200).send(courses);
         } catch(e) {
             res.status(400).json({ message: e.message} );
