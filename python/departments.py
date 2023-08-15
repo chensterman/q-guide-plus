@@ -5,7 +5,7 @@ import csv
 ######################################## GLOBAL VARIABLES
 
 # Courses CSV file
-CSV = "courses.csv"
+CSV = "spring2023.csv"
 
 ######################################## MAIN
 

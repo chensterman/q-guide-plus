@@ -145,7 +145,7 @@ def qscrape_new():
             FLAIR.predict(s)
 
             # Analyze label
-            s = s.to_dict()["labels"][0]
+            s = s.to_dict()["all labels"][0]
             if s["value"] == 'NEGATIVE':
                 sentiment += -1.0 * s["confidence"]
             else:
