@@ -3,7 +3,7 @@
 
       <v-card class="pa-5 ma-10" color="#f8e8ca">
           <div class="heading">
-            UPDATED EVALUATIONS: 2021 FALL
+            UPDATED EVALUATIONS: 2023 SPRING
           </div>
       </v-card>
 
