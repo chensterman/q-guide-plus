@@ -13,7 +13,7 @@
           </div>
 
           <div class="heading">
-            Blake Young, Benny Chang, Leon Chen
+            Brought to you by Leon Chen
           </div>
 
           <div class="body">
