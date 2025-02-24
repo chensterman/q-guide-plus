@@ -1,6 +1,6 @@
 import axios from "axios";
 // EXTREMELY IMPORTANT CHANGE TO CORRECT PRODUCTION URL
-const path = "https://qguideplus.com/api/query";
+const path = "https://q-guide-plus.vercel.app/api/query";
 
 export default class API {
     static async query(params) {
